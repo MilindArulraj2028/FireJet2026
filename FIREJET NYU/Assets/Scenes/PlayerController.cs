@@ -38,6 +38,12 @@ public class PlayerController : MonoBehaviour
 
     [Header("Damage + Health")]
     public Slider boost;
+    public float MaxSpeed;
+    public float CurrentSpeed;
+    public float speedConstant;
+    public float MaxHealth;
+    public float CurrentHealth;
+
     
     void Start()
     {
@@ -46,17 +52,21 @@ public class PlayerController : MonoBehaviour
         instance = this;
         fuel = maxFuel;
         boost.value = 1f;
+        MaxSpeed = Mathf.Sqrt((speed * boostAmount)* (speed * boostAmount)+ (speed * boostAmount) * (speed * boostAmount));
     }
 
     
     void Update()
     {
+        CurrentSpeed = Mathf.Sqrt((rb.velocity.x * rb.velocity.x) + (rb.velocity.y * rb.velocity.y));
+        speedConstant = Mathf.Clamp(0f, 1f, speedConstant);
+        speedConstant = CurrentSpeed / MaxSpeed;
         TargetSpeedX = 0f;
         TargetSpeedY = 0f;
-        // particleCount = particles.particleCount;
-        boost.value = (fuel / maxFuel) - 0.05f;               // ADD BOLEAN FLAG REFUELING/FUELING SO THEY DONT CLASH OR JITTER
-        //Input
+        
+        boost.value = (fuel / maxFuel) - 0.05f;              
         spewing = false;
+
         if (Input.GetKey(KeyCode.Space))
         {
 
@@ -66,10 +76,7 @@ public class PlayerController : MonoBehaviour
                 constant = boostAmount;
                 acceleration = 55f;
                 
-
-
             }
-            
         }
         else
         {
@@ -78,7 +85,7 @@ public class PlayerController : MonoBehaviour
             Debug.Log("Refilling");
         }
 
-
+        //Input
         if (Input.GetKey(KeyCode.UpArrow))
         {
            
@@ -138,15 +145,16 @@ public class PlayerController : MonoBehaviour
             fuel += fuelRefillSpeed * Time.deltaTime;
         }
 
-        fuel = Mathf.Clamp(fuel, 0f, maxFuel);
+        fuel = Mathf.Clamp(fuel, 0f, maxFuel);                     //Show this
         acceleration = 30f;
 
-        //  particles.Stop();
+  
         
 
         //Process velocity
         lerpSpeedX = Mathf.MoveTowards(rb.velocity.x, TargetSpeedX, acceleration * Time.deltaTime);
         lerpSpeedY = Mathf.MoveTowards(rb.velocity.y, TargetSpeedY, acceleration * Time.deltaTime);
+        
         rb.velocity = new Vector2(lerpSpeedX, lerpSpeedY);
 
 
