@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     [Header("Movement Settings")]
     public float TargetSpeedX;
     public float TargetSpeedY;
+    [Space(10)]
     public float lerpSpeedX;
     public float lerpSpeedY;
     public float acceleration; // 25
@@ -41,13 +42,17 @@ public class PlayerController : MonoBehaviour
     public float MaxSpeed;
     public float CurrentSpeed;
     public float speedConstant;
+    [Space(10)]
     public float MaxHealth;
     public float CurrentHealth;
+    [Space(6)]
+    public float DamageConstant;
+    public float potentialDamage;
 
     
     void Start()
     {
-
+        CurrentHealth = MaxHealth;
         particles.Stop();
         instance = this;
         fuel = maxFuel;
@@ -59,8 +64,9 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         CurrentSpeed = Mathf.Sqrt((rb.velocity.x * rb.velocity.x) + (rb.velocity.y * rb.velocity.y));
-        speedConstant = Mathf.Clamp(0f, 1f, speedConstant);
         speedConstant = CurrentSpeed / MaxSpeed;
+        
+        potentialDamage = speedConstant * DamageConstant;
         TargetSpeedX = 0f;
         TargetSpeedY = 0f;
         
