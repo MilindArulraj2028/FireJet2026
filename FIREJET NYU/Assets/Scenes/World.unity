@@ -184,8 +184,8 @@ MonoBehaviour:
   izPlaying: 0
   maxFuel: 500
   fuel: 0
-  fuelDepletionSpeed: 3
-  fuelRefillSpeed: 3
+  fuelDepletionSpeed: 150
+  fuelRefillSpeed: 300
   refilling: 0
   boost: {fileID: 1960573894}
 --- !u!50 &39022493
@@ -302,7 +302,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.8867924, g: 0.3998932, b: 0.3998932, a: 1}
+  m_Color: {r: 0.7735849, g: 0.37803486, b: 0.37803486, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

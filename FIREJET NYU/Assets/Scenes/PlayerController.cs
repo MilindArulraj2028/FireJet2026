@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour
     public ParticleSystem particles;
     public bool spewing;
     public bool izPlaying;
-    // public float particleCount;
+    
     [Header("Boosting")]
     public float maxFuel;
     public float fuel;
@@ -38,48 +38,50 @@ public class PlayerController : MonoBehaviour
 
     [Header("Damage + Health")]
     public Slider boost;
-    // Start is called before the first frame update
+    
     void Start()
     {
+
         particles.Stop();
         instance = this;
         fuel = maxFuel;
+        boost.value = 1f;
     }
 
-    // Update is called once per frame
+    
     void Update()
     {
         TargetSpeedX = 0f;
         TargetSpeedY = 0f;
         // particleCount = particles.particleCount;
-        boost.value = (fuel / maxFuel) - 0.1f;               // ADD BOLEAN FLAG REFUELING/FUELING SO THEY DONT CLASH OR JITTER
+        boost.value = (fuel / maxFuel) - 0.05f;               // ADD BOLEAN FLAG REFUELING/FUELING SO THEY DONT CLASH OR JITTER
         //Input
         spewing = false;
         if (Input.GetKey(KeyCode.Space))
         {
-
-            fuelRefillSpeed += -3f;
 
             if (fuel > 0f)
             {
                 spewing = true;
                 constant = boostAmount;
                 acceleration = 55f;
+                
 
 
             }
-            else
-            {
+            
+        }
+        else
+        {
 
-                fuel -= fuelRefillSpeed;
-            }
-
+            //fuel bigger
+            Debug.Log("Refilling");
         }
 
 
         if (Input.GetKey(KeyCode.UpArrow))
         {
-            Debug.Log("Up");
+           
             TargetSpeedY = speed * constant;
         }
         if (Input.GetKey(KeyCode.DownArrow))
@@ -103,12 +105,12 @@ public class PlayerController : MonoBehaviour
         if (spewing == false && izPlaying)
         {
             particles.Stop();
-            Debug.Log("No Particles rn");
+            
             izPlaying = false;
         }
         if (spewing == true && !izPlaying)
         {
-            Debug.Log("Particles should be spewing");
+            
             particles.Play();
             izPlaying = true;
         }
@@ -117,12 +119,30 @@ public class PlayerController : MonoBehaviour
             constant = 1f; ;
             acceleration = 30f;
         }
+        if (Input.GetKey(KeyCode.Space) && fuel > 0f)
+        {
+            refilling = true;
+            
+            refilling = false;
+        }
+        if (!Input.GetKey(KeyCode.Space))
+        {
+            refilling = true;
+        }
+        if (refilling == false)
+        {   
+            fuel -= fuelDepletionSpeed * Time.deltaTime;
+        }
+        if (refilling == true)
+        {
+            fuel += fuelRefillSpeed * Time.deltaTime;
+        }
 
         fuel = Mathf.Clamp(fuel, 0f, maxFuel);
         acceleration = 30f;
 
         //  particles.Stop();
-        Debug.Log("NotSpewing");
+        
 
         //Process velocity
         lerpSpeedX = Mathf.MoveTowards(rb.velocity.x, TargetSpeedX, acceleration * Time.deltaTime);
