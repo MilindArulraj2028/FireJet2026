@@ -51,9 +51,13 @@ public class PlayerController : MonoBehaviour
     [Header("Miscellaneus")]
     public bool isDead;
     public ParticleSystem deathParticle;
-    
+    public Animator transition;
+    public SpriteRenderer renderer;
+
     void Start()
     {
+        renderer.enabled = true;
+        transition.SetBool("Die", false);
         isDead = false;
         CurrentHealth = MaxHealth;
         particles.Stop();
@@ -163,10 +167,14 @@ public class PlayerController : MonoBehaviour
         acceleration = 30f;
 
   
-        if (CurrentHealth < 0f)
+        if (CurrentHealth < 0f && !isDead)
         {
             isDead = true;
+            StartCoroutine("StartDeath");
+
+            
         }
+        
 
         //Process velocity
         lerpSpeedX = Mathf.MoveTowards(rb.velocity.x, TargetSpeedX, acceleration * Time.deltaTime);
@@ -180,7 +188,7 @@ public class PlayerController : MonoBehaviour
         if (isDead == true)
         {
             Instantiate(deathParticle, transform.position, Quaternion.identity);
-            Destroy(gameObject);
+            renderer.enabled = false;
         }
 
 
@@ -200,6 +208,15 @@ public class PlayerController : MonoBehaviour
     void TakeDamage()
     {
         CurrentHealth -= potentialDamage;
+    }
+
+    IEnumerator StartDeath()
+    {
+        transition.SetBool("Die", true);
+        yield return new WaitForSeconds(2f);
+        print("g=o");
+        SceneManager.LoadScene(2);
+
     }
 }
 
