@@ -48,10 +48,13 @@ public class PlayerController : MonoBehaviour
     [Space(6)]
     public float DamageConstant;
     public float potentialDamage;
-
+    [Header("Miscellaneus")]
+    public bool isDead;
+    public ParticleSystem deathParticle;
     
     void Start()
     {
+        isDead = false;
         CurrentHealth = MaxHealth;
         particles.Stop();
         instance = this;
@@ -77,7 +80,7 @@ public class PlayerController : MonoBehaviour
         
         boost.value = (fuel / maxFuel) - 0.05f;              
         spewing = false;
-
+       
         if (Input.GetKey(KeyCode.Space))
         {
                                           
@@ -160,13 +163,27 @@ public class PlayerController : MonoBehaviour
         acceleration = 30f;
 
   
-        
+        if (CurrentHealth < 0f)
+        {
+            isDead = true;
+        }
 
         //Process velocity
         lerpSpeedX = Mathf.MoveTowards(rb.velocity.x, TargetSpeedX, acceleration * Time.deltaTime);
         lerpSpeedY = Mathf.MoveTowards(rb.velocity.y, TargetSpeedY, acceleration * Time.deltaTime);
-        
-        rb.velocity = new Vector2(lerpSpeedX, lerpSpeedY);
+        if (isDead == false)
+        {
+
+            rb.velocity = new Vector2(lerpSpeedX, lerpSpeedY);
+
+        }
+        if (isDead == true)
+        {
+            Instantiate(deathParticle, transform.position, Quaternion.identity);
+            Destroy(gameObject);
+        }
+
+
 
 
         // Rotation Control
