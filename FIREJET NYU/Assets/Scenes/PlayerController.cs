@@ -34,11 +34,11 @@ public class PlayerController : MonoBehaviour
 
     public float fuelRefillSpeed;
     public bool refilling;
-
+    public Slider boost;
 
 
     [Header("Damage + Health")]
-    public Slider boost;
+    public Slider healthSlider;
     public float MaxSpeed;
     public float CurrentSpeed;
     public float speedConstant;
@@ -63,6 +63,11 @@ public class PlayerController : MonoBehaviour
     
     void Update()
     {
+        healthSlider.value = CurrentHealth/MaxHealth;
+
+
+
+
         CurrentSpeed = Mathf.Sqrt((rb.velocity.x * rb.velocity.x) + (rb.velocity.y * rb.velocity.y));
         speedConstant = CurrentSpeed / MaxSpeed;
         
@@ -75,7 +80,7 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKey(KeyCode.Space))
         {
-
+                                          
             if (fuel > 0f)
             {
                 spewing = true;
@@ -167,6 +172,17 @@ public class PlayerController : MonoBehaviour
         // Rotation Control
         float angle = Mathf.Atan2(rb.velocity.y, rb.velocity.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, angle + 180f);
+    }
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("Wall"))
+        {
+            TakeDamage();
+        }
+    }
+    void TakeDamage()
+    {
+        CurrentHealth -= potentialDamage;
     }
 }
 
