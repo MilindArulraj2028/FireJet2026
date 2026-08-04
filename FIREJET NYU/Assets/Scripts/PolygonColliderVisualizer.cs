@@ -12,16 +12,15 @@ public class PolygonColliderVisualizer : MonoBehaviour
         SyncLineRenderer();
     }
 
-    [ContextMenu("同步显示")]
     void SyncLineRenderer()
     {
         PolygonCollider2D poly = GetComponent<PolygonCollider2D>();
         LineRenderer line = GetComponent<LineRenderer>();
 
-        Vector2[] points = poly.points; // 默认取第一条路径(path 0)
+        Vector2[] points = poly.points; // Defaults to the first path(path 0)
 
-        line.useWorldSpace = false; // 局部坐标,和Collider保持一致
-        line.loop = true; // 闭合,首尾自动连接,不用手动加重复点
+        line.useWorldSpace = false; // Local coordinates; keep aligned with the collider
+                line.loop = true; // Closes and automatically connects the start and end points; no need to manually add duplicate points
 
         line.positionCount = points.Length;
         for (int i = 0; i < points.Length; i++)

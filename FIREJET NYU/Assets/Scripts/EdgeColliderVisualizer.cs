@@ -12,7 +12,6 @@ public class EdgeColliderVisualizer : MonoBehaviour
         SyncLineRenderer();
     }
 
-    [ContextMenu("同步显示")]
     void SyncLineRenderer()
     {
         EdgeCollider2D edge = GetComponent<EdgeCollider2D>();
@@ -26,7 +25,7 @@ public class EdgeColliderVisualizer : MonoBehaviour
             line.SetPosition(i, points[i]);
         }
 
-        line.startWidth = 0.2f; // 墙的粗细,自己调
-        line.endWidth = 0.2f;
+        line.startWidth = 0.2f; //Adjust wall parameters
+                line.endWidth = 0.2f;
     }
 }
