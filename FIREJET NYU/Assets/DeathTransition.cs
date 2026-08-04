@@ -4,21 +4,30 @@ using UnityEngine;
 
 public class DeathTransition : MonoBehaviour
 {
+    
 
-    public PlayerController player;
     public Animator transition;
+    
+    public float timer;
     // Start is called before the first frame update
     void Start()
     {
-        
+     
+        transition.SetBool("Start", true);
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (player.isDead == true)
+        timer -= Time.deltaTime;
+       
+        if (timer <= 0f)
         {
-            transition.SetTrigger("Die");
+            transition.SetBool("Start", false);
         }
+        
+
     }
+    
 }
