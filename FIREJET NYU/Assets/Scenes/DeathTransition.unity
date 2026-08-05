@@ -408,7 +408,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 2119665335}
-  timer: 3.6
+  timer: 4
 --- !u!95 &2119665335
 Animator:
   serializedVersion: 5

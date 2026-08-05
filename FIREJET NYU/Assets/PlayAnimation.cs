@@ -9,7 +9,7 @@ public class PlayAnimation : MonoBehaviour
     public float timer;
     // Start is called before the first
     // frame update
-    void Start()
+    void Awake()
     {
         anim.SetBool("Playing", true);
         
@@ -22,7 +22,7 @@ public class PlayAnimation : MonoBehaviour
         timer -= Time.deltaTime;
         if (timer <= 0)
         {
-            SceneManager.LoadScene(1);
+            SceneManager.LoadScene(3);
         }
     }
 }
