@@ -15,9 +15,12 @@ EditorBuildSettings:
     path: Assets/Scenes/TutorialMap.unity
     guid: 498228ae8f374e741a3c3ce6484bd72c
   - enabled: 1
-    path: Assets/Scenes/DeathTransition.unity
+    path: Assets/Scenes/Transitions/DeathTransition.unity
     guid: 28a3c830f40417e498cbc488fcaa9a38
   - enabled: 1
     path: Assets/Scenes/Level1Map.unity
     guid: 5091e8b4d0aa2a14f92c298edfc1ebdf
+  - enabled: 1
+    path: Assets/Scenes/Transitions/CoinFlip.unity
+    guid: de34662e48839c64090c98157e713c8b
   m_configObjects: {}
