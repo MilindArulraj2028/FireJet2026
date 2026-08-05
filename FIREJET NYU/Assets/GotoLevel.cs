@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class GotoLevel : MonoBehaviour
 {
     public float timerLength;
-    public int sceneIndex;
+    public string sceneIndex;
     // Start is called before the first frame update
     void Start()
     {
