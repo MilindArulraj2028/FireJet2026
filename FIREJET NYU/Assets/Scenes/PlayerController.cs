@@ -47,6 +47,13 @@ public class PlayerController : MonoBehaviour
     [Space(6)]
     public float DamageConstant;
     public float potentialDamage;
+
+    [Header("Upgrade Points")]
+    public float UpgradePoints;
+    public float distance;
+    public float radius;
+
+
     [Header("Miscellaneus")]
     public bool isDead;
     public ParticleSystem deathParticle;
@@ -198,8 +205,17 @@ public class PlayerController : MonoBehaviour
         // Rotation Control
         float angle = Mathf.Atan2(rb.velocity.y, rb.velocity.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, angle + 180f);
-        
 
+        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, radius);
+
+        foreach (Collider2D hit in hits)
+        {
+            if (hit.CompareTag("Wall"))
+            {
+             distance += Mathf.Sqrt((transform.position.x - hit.transform.position.x) * (transform.position.x - hit.transform.position.x) +
+                    (transform.position.y - hit.transform.position.y) * (transform.position.y - hit.transform.position.y));
+            }
+        }
     }
     void OnCollisionEnter2D(Collision2D other)
     {

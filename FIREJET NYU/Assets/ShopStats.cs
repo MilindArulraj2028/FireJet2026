@@ -1,16 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class ShopStats : MonoBehaviour
 {
     public static ShopStats instance;
 
+
+    [Header("Stats")]
     public PlayerController player;
+    [Space(10)]
     public float playerAgility;
     public float playerHealth;
     public float playerFuelEfficiency;
     public float playerMaxFuel;
+    
+
 
     void Awake()
     {
@@ -33,10 +40,11 @@ public class ShopStats : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-
        
-        
+
+
+
+
     }
 }
 
