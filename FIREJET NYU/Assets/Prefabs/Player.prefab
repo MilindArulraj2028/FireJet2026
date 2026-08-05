@@ -4852,6 +4852,7 @@ GameObject:
   - component: {fileID: 5929541762639371291}
   - component: {fileID: 2904457874827382430}
   - component: {fileID: 7768289296347750098}
+  - component: {fileID: -8046361749556743135}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -5041,3 +5042,18 @@ MonoBehaviour:
   deathParticle: {fileID: 7638973715735482060, guid: ac96f42e0e96c0f408cd9d2723e4f214, type: 3}
   transition: {fileID: 0}
   renderer: {fileID: 4992502281353583241}
+--- !u!114 &-8046361749556743135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7855578901841741226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57ce79af4bc66e1498af3236accc7828, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerCollider: {fileID: 5929541762639371291}
+  edgeCollider: {fileID: 0}
+  score: 0
