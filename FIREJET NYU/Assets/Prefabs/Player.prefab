@@ -5039,3 +5039,5 @@ MonoBehaviour:
   potentialDamage: 0
   isDead: 0
   deathParticle: {fileID: 7638973715735482060, guid: ac96f42e0e96c0f408cd9d2723e4f214, type: 3}
+  transition: {fileID: 0}
+  renderer: {fileID: 4992502281353583241}

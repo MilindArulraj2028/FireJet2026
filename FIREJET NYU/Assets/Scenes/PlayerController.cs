@@ -213,7 +213,7 @@ public class PlayerController : MonoBehaviour
     IEnumerator StartDeath()
     {
         transition.SetBool("Die", true);
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1.8f);
         print("g=o");
         SceneManager.LoadScene(2);
 
