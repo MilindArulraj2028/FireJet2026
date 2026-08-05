@@ -170,6 +170,10 @@ public class PlayerController : MonoBehaviour
         if (CurrentHealth < 0f && !isDead)
         {
             isDead = true;
+            ShopStats.instance.playerAgility = acceleration;
+            ShopStats.instance.playerHealth = MaxHealth;
+            ShopStats.instance.playerFuelEfficiency = fuelDepletionSpeed;
+            ShopStats.instance.playerMaxFuel = maxFuel;
             StartCoroutine("StartDeath");
 
             
