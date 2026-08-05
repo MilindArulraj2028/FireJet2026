@@ -16,7 +16,7 @@ public class DistanceCheck : MonoBehaviour
 
         float distance = distanceInfo.distance;
 
-        Debug.Log("distance£º" + distance);
+        Debug.Log("distance:" + distance);
         score += 10 - distance;
     }
 }
