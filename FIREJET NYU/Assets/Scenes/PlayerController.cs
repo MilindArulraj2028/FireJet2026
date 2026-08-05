@@ -8,7 +8,6 @@ public class PlayerController : MonoBehaviour
 {
     public static PlayerController instance;
 
-
     public Rigidbody2D rb;
     
     [Header("Movement Settings")]
@@ -104,6 +103,7 @@ public class PlayerController : MonoBehaviour
         }
 
         //Input
+        
         if (Input.GetKey(KeyCode.UpArrow))
         {
            
@@ -124,7 +124,7 @@ public class PlayerController : MonoBehaviour
         }
         acceleration = 30f;
         constant = 1f;
-
+        
 
 
         if (spewing == false && izPlaying)
@@ -174,8 +174,8 @@ public class PlayerController : MonoBehaviour
 
             
         }
-        
 
+        
         //Process velocity
         lerpSpeedX = Mathf.MoveTowards(rb.velocity.x, TargetSpeedX, acceleration * Time.deltaTime);
         lerpSpeedY = Mathf.MoveTowards(rb.velocity.y, TargetSpeedY, acceleration * Time.deltaTime);
@@ -190,13 +190,12 @@ public class PlayerController : MonoBehaviour
             Instantiate(deathParticle, transform.position, Quaternion.identity);
             renderer.enabled = false;
         }
-
-
-
-
+        
         // Rotation Control
         float angle = Mathf.Atan2(rb.velocity.y, rb.velocity.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, angle + 180f);
+        
+
     }
     void OnCollisionEnter2D(Collision2D other)
     {
