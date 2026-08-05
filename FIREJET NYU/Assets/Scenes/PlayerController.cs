@@ -215,7 +215,7 @@ public class PlayerController : MonoBehaviour
         transition.SetBool("Die", true);
         yield return new WaitForSeconds(1.8f);
         print("g=o");
-        SceneManager.LoadScene(4);
+        SceneManager.LoadScene("CoinFlip");
 
     }
 }
