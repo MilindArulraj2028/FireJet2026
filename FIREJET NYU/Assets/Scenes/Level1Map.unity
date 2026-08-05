@@ -130,6 +130,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -8046361749556743135, guid: c78b598ad1469f640af3d64e3b5e40f0, type: 3}
+      propertyPath: edgeCollider
+      value: 
+      objectReference: {fileID: 600365847}
     - target: {fileID: 1525445413786519332, guid: c78b598ad1469f640af3d64e3b5e40f0, type: 3}
       propertyPath: m_LocalPosition.x
       value: -58.4

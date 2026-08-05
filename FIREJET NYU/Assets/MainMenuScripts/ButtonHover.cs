@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class ButtonHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
@@ -17,6 +20,10 @@ public class ButtonHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     {
         normalScale = transform.localScale;
         targetScale = normalScale;
+
+        Button button = GetComponent<Button>();
+        button.onClick.AddListener(StartGame);
+        ClickEffect();
     }
 
 
@@ -49,4 +56,10 @@ public class ButtonHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     {
         targetScale = normalScale * 0.9f;
     }
+
+    void StartGame()
+    {
+        SceneManager.LoadScene("TutorialMap");
+    }
+
 }
