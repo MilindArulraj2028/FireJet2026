@@ -5022,7 +5022,7 @@ MonoBehaviour:
   boostAmount: 5
   particles: {fileID: 2718303242108328750}
   spewing: 0
-  izPlaying: 0
+  izPlaying: 1
   maxFuel: 500
   fuel: 0
   fuelDepletionSpeed: 150
