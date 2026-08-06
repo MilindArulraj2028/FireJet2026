@@ -432,7 +432,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb0daf8da79359749bb4eb267f8332d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timerLength: 4
+  timerLength: 3.5
   sceneIndex: Shop
 --- !u!1 &1849879003 stripped
 GameObject:

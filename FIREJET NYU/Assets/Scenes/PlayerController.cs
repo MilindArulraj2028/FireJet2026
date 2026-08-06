@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using Cinemachine;
 
 public class PlayerController : MonoBehaviour
 {
@@ -52,7 +53,10 @@ public class PlayerController : MonoBehaviour
     public float UpgradePoints;
     public float distance;
     public float radius;
+    [Header("Camera Stuff")]
+    public CinemachineVirtualCamera vcam;
 
+    private CinemachineBasicMultiChannelPerlin noise;
 
     [Header("Miscellaneus")]
     public bool isDead;
@@ -71,16 +75,17 @@ public class PlayerController : MonoBehaviour
         fuel = maxFuel;
         boost.value = 1f;
         MaxSpeed = Mathf.Sqrt((speed * boostAmount)* (speed * boostAmount)+ (speed * boostAmount) * (speed * boostAmount));
+        noise = vcam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
     }
 
     
     void Update()
     {
         healthSlider.value = CurrentHealth/MaxHealth;
+        StopShake();
 
 
-
-
+        acceleration = 30f;
         CurrentSpeed = Mathf.Sqrt((rb.velocity.x * rb.velocity.x) + (rb.velocity.y * rb.velocity.y));
         speedConstant = CurrentSpeed / MaxSpeed;
         
@@ -99,6 +104,7 @@ public class PlayerController : MonoBehaviour
                 spewing = true;
                 constant = boostAmount;
                 acceleration = 55f;
+                Shake(1.5f);
                 
             }
         }
@@ -129,8 +135,8 @@ public class PlayerController : MonoBehaviour
         {
             TargetSpeedX = speed * constant;
         }
-        acceleration = 30f;
-        constant = 1f;
+        
+        
         
 
 
@@ -171,7 +177,7 @@ public class PlayerController : MonoBehaviour
         }
 
         fuel = Mathf.Clamp(fuel, 0f, maxFuel);                     //Show this
-        acceleration = 30f;
+        
 
   
         if (CurrentHealth < 0f && !isDead)
@@ -205,17 +211,19 @@ public class PlayerController : MonoBehaviour
         // Rotation Control
         float angle = Mathf.Atan2(rb.velocity.y, rb.velocity.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, angle + 180f);
+        constant = 1f;
 
-        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, radius);
+        // Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, radius);
 
-        foreach (Collider2D hit in hits)
-        {
-            if (hit.CompareTag("Wall"))
-            {
-             distance += Mathf.Sqrt((transform.position.x - hit.transform.position.x) * (transform.position.x - hit.transform.position.x) +
-                    (transform.position.y - hit.transform.position.y) * (transform.position.y - hit.transform.position.y));
-            }
-        }
+        // foreach (Collider2D hit in hits)
+        // {
+        //     if (hit.CompareTag("Wall"))
+        //    {
+        //     distance += Mathf.Sqrt((transform.position.x - hit.transform.position.x) * (transform.position.x - hit.transform.position.x) +
+        //            (transform.position.y - hit.transform.position.y) * (transform.position.y - hit.transform.position.y));
+        //    }
+        // }
+
     }
     void OnCollisionEnter2D(Collision2D other)
     {
@@ -236,6 +244,15 @@ public class PlayerController : MonoBehaviour
         print("g=o");
         SceneManager.LoadScene("CoinFlip");
 
+    }
+    public void Shake(float intensity)
+    {
+        noise.m_AmplitudeGain = intensity;
+    }
+
+    public void StopShake()
+    {
+        noise.m_AmplitudeGain = 0f;
     }
 }
 
