@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     public static PlayerController instance;
 
     public Rigidbody2D rb;
-    
+
     [Header("Movement Settings")]
     public float TargetSpeedX;
     public float TargetSpeedY;
@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour
     public ParticleSystem particles;
     public bool spewing;
     public bool izPlaying;
-    
+
     [Header("Boosting")]
     public float maxFuel;
     public float fuel;
@@ -76,39 +76,38 @@ public class PlayerController : MonoBehaviour
         instance = this;
         fuel = maxFuel;
         boost.value = 1f;
-        MaxSpeed = Mathf.Sqrt((speed * boostAmount)* (speed * boostAmount)+ (speed * boostAmount) * (speed * boostAmount));
+        MaxSpeed = Mathf.Sqrt((speed * boostAmount) * (speed * boostAmount) + (speed * boostAmount) * (speed * boostAmount));
         noise = vcam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
     }
 
-    
+
     void Update()
     {
-        intensity = 0f;
-        healthSlider.value = CurrentHealth/MaxHealth;
-        StopShake();
-                       ///SHAKE
+        
+        healthSlider.value = CurrentHealth / MaxHealth;
+        
 
         acceleration = 30f;
         CurrentSpeed = Mathf.Sqrt((rb.velocity.x * rb.velocity.x) + (rb.velocity.y * rb.velocity.y));
         speedConstant = CurrentSpeed / MaxSpeed;
-        
+
         potentialDamage = speedConstant * DamageConstant;
         TargetSpeedX = 0f;
         TargetSpeedY = 0f;
-        
-        boost.value = (fuel / maxFuel) - 0.05f;              
+
+        boost.value = (fuel / maxFuel) - 0.05f;
         spewing = false;
-       
+
         if (Input.GetKey(KeyCode.Space))
         {
-                                          
+
             if (fuel > 0f)
             {
                 spewing = true;
                 constant = boostAmount;
                 acceleration = 55f;
                 intensity = 1.5f;
-                
+
             }
         }
         else
@@ -119,10 +118,10 @@ public class PlayerController : MonoBehaviour
         }
 
         //Input
-        
+
         if (Input.GetKey(KeyCode.UpArrow))
         {
-           
+
             TargetSpeedY = speed * constant;
         }
         if (Input.GetKey(KeyCode.DownArrow))
@@ -138,20 +137,20 @@ public class PlayerController : MonoBehaviour
         {
             TargetSpeedX = speed * constant;
         }
-        
-        
-        
+
+
+
 
 
         if (spewing == false && izPlaying)
         {
             particles.Stop();
-            
+
             izPlaying = false;
         }
         if (spewing == true && !izPlaying)
         {
-            
+
             particles.Play();
             izPlaying = true;
         }
@@ -163,7 +162,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey(KeyCode.Space) && fuel > 0f)
         {
             refilling = true;
-            
+
             refilling = false;
         }
         if (!Input.GetKey(KeyCode.Space))
@@ -171,7 +170,7 @@ public class PlayerController : MonoBehaviour
             refilling = true;
         }
         if (refilling == false)
-        {   
+        {
             fuel -= fuelDepletionSpeed * Time.deltaTime;
         }
         if (refilling == true)
@@ -180,9 +179,9 @@ public class PlayerController : MonoBehaviour
         }
 
         fuel = Mathf.Clamp(fuel, 0f, maxFuel);                     //Show this
-        
 
-  
+
+
         if (CurrentHealth < 0f && !isDead)
         {
             isDead = true;
@@ -195,7 +194,7 @@ public class PlayerController : MonoBehaviour
 
         }
 
-        
+
         //Process velocity
         lerpSpeedX = Mathf.MoveTowards(rb.velocity.x, TargetSpeedX, acceleration * Time.deltaTime);
         lerpSpeedY = Mathf.MoveTowards(rb.velocity.y, TargetSpeedY, acceleration * Time.deltaTime);
@@ -207,10 +206,10 @@ public class PlayerController : MonoBehaviour
         }
         if (isDead == true)
         {
-            Instantiate(deathParticle, transform.position + new Vector3(0f,0f,-3f), Quaternion.identity);
+            Instantiate(deathParticle, transform.position + new Vector3(0f, 0f, -3f), Quaternion.identity);
             renderer.enabled = false;
         }
-        
+
         // Rotation Control
         float angle = Mathf.Atan2(rb.velocity.y, rb.velocity.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, angle + 180f);
@@ -248,7 +247,7 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(StartDeath("CoinFlip"));
 
         }
-       
+
     }
     void TakeDamage(float damage)
     {
