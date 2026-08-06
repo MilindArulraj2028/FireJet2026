@@ -55,6 +55,7 @@ public class PlayerController : MonoBehaviour
     public float radius;
     [Header("Camera Stuff")]
     public CinemachineVirtualCamera vcam;
+    public float intensity;
 
     private CinemachineBasicMultiChannelPerlin noise;
 
@@ -82,9 +83,10 @@ public class PlayerController : MonoBehaviour
     
     void Update()
     {
+        intensity = 0f;
         healthSlider.value = CurrentHealth/MaxHealth;
         StopShake();
-
+                       ///SHAKE
 
         acceleration = 30f;
         CurrentSpeed = Mathf.Sqrt((rb.velocity.x * rb.velocity.x) + (rb.velocity.y * rb.velocity.y));
@@ -105,7 +107,7 @@ public class PlayerController : MonoBehaviour
                 spewing = true;
                 constant = boostAmount;
                 acceleration = 55f;
-                Shake(1.5f);
+                intensity = 1.5f;
                 
             }
         }
@@ -205,7 +207,7 @@ public class PlayerController : MonoBehaviour
         }
         if (isDead == true)
         {
-            Instantiate(deathParticle, transform.position, Quaternion.identity);
+            Instantiate(deathParticle, transform.position + new Vector3(0f,0f,-3f), Quaternion.identity);
             renderer.enabled = false;
         }
         
@@ -224,17 +226,19 @@ public class PlayerController : MonoBehaviour
         //            (transform.position.y - hit.transform.position.y) * (transform.position.y - hit.transform.position.y));
         //    }
         // }
-
+        noise.m_AmplitudeGain = intensity;
     }
     void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Wall"))
         {
             TakeDamage(potentialDamage);
+            StartCoroutine(ShakeOnce(10));
         }
         if (other.gameObject.CompareTag("Damage"))
         {
-            TakeDamage(20f);
+            TakeDamage(40f);
+            StartCoroutine(ShakeOnce(10));
         }
     }
     void OnTriggerEnter2D(Collider2D other)
@@ -268,6 +272,14 @@ public class PlayerController : MonoBehaviour
     public void StopShake()
     {
         noise.m_AmplitudeGain = 0f;
+    }
+    IEnumerator ShakeOnce(float strength)
+    {
+        intensity = 10f;
+        Debug.Log("Shaking");
+        yield return new WaitForSeconds(0.2f);
+        intensity = 0f;
+        Debug.Log("Not Shaking");
     }
 }
 
