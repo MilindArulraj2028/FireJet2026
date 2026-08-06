@@ -112,11 +112,7 @@ public class PlayerController : MonoBehaviour
 
             }
         }
-        else
-        {
-
-           
-        }
+       
 
         //Input
 
