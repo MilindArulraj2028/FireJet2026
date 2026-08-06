@@ -63,6 +63,7 @@ public class PlayerController : MonoBehaviour
     public ParticleSystem deathParticle;
     public Animator transition;
     public SpriteRenderer renderer;
+    private bool died;
 
     void Start()
     {
@@ -187,9 +188,9 @@ public class PlayerController : MonoBehaviour
             ShopStats.instance.playerHealth = MaxHealth;
             ShopStats.instance.playerFuelEfficiency = fuelDepletionSpeed;
             ShopStats.instance.playerMaxFuel = maxFuel;
-            StartCoroutine("StartDeath");
+            StartCoroutine(StartDeath("DeathTransition"));
 
-            
+
         }
 
         
@@ -236,18 +237,27 @@ public class PlayerController : MonoBehaviour
             TakeDamage(20f);
         }
     }
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Finish"))
+        {
+            StartCoroutine(StartDeath("CoinFlip"));
+
+        }
+       
+    }
     void TakeDamage(float damage)
     {
         CurrentHealth -= damage;
     }
 
 
-    IEnumerator StartDeath()
+    IEnumerator StartDeath(string bro)
     {
         transition.SetBool("Die", true);
         yield return new WaitForSeconds(1.8f);
         print("g=o");
-        SceneManager.LoadScene("CoinFlip");
+        SceneManager.LoadScene(bro);
 
     }
     public void Shake(float intensity)
