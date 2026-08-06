@@ -115,8 +115,7 @@ public class PlayerController : MonoBehaviour
         else
         {
 
-            //fuel bigger
-            Debug.Log("Refilling");
+           
         }
 
         //Input
@@ -245,6 +244,8 @@ public class PlayerController : MonoBehaviour
         {
             CurrentHealth = 0f;
             StartCoroutine(ShakeOnce(10f));
+            Instantiate(deathParticle, transform.position + new Vector3(0f, 0f, 3f), Quaternion.identity);
+            SceneManager.LoadScene("DeathTransition");
         }
     }
     void OnTriggerEnter2D(Collider2D other)

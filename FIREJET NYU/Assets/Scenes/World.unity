@@ -8770,7 +8770,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startDelay: 2
-  speed: 0
+  speed: 6
   pos: {x: 0, y: 0, z: 0}
 --- !u!61 &1315062070
 BoxCollider2D:
