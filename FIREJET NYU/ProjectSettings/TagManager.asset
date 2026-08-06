@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Wall
   - Damage
+  - Lava
   layers:
   - Default
   - TransparentFX

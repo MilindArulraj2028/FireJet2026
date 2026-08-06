@@ -35,6 +35,8 @@ public class PlayerController : MonoBehaviour
     public float fuelRefillSpeed;
     public bool refilling;
     public Slider boost;
+  //  private float boostShake;
+  //  private float impactShake;
 
 
     [Header("Damage + Health")]
@@ -238,6 +240,11 @@ public class PlayerController : MonoBehaviour
         {
             TakeDamage(40f);
             StartCoroutine(ShakeOnce(10));
+        }
+        if (other.gameObject.CompareTag("Lava"))
+        {
+            CurrentHealth = 0f;
+            StartCoroutine(ShakeOnce(10f));
         }
     }
     void OnTriggerEnter2D(Collider2D other)
