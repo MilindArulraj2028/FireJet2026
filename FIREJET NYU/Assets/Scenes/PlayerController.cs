@@ -229,13 +229,18 @@ public class PlayerController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Wall"))
         {
-            TakeDamage();
+            TakeDamage(potentialDamage);
+        }
+        if (other.gameObject.CompareTag("Damage"))
+        {
+            TakeDamage(20f);
         }
     }
-    void TakeDamage()
+    void TakeDamage(float damage)
     {
-        CurrentHealth -= potentialDamage;
+        CurrentHealth -= damage;
     }
+
 
     IEnumerator StartDeath()
     {
