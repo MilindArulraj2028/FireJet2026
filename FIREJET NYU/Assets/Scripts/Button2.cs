@@ -6,9 +6,9 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Collections;
-
-public class ButtonHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class Button2 : MonoBehaviour
 {
+
     public float hoverScale = 1.1f;   // Magnification
     public float speed = 10f;         // Animation speed
 
@@ -58,7 +58,7 @@ public class ButtonHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
     void StartGame()
     {
-        SceneManager.LoadScene("TutorialMap");
+        SceneManager.LoadScene("World");
     }
 
 }
