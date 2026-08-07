@@ -1556,6 +1556,10 @@ PrefabInstance:
       value: 2000
       objectReference: {fileID: 0}
     - target: {fileID: 6340172038647195901, guid: b43d82ef74e25f9478d6118503df7248, type: 3}
+      propertyPath: MaxHealth
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 6340172038647195901, guid: b43d82ef74e25f9478d6118503df7248, type: 3}
       propertyPath: transition
       value: 
       objectReference: {fileID: 1396952634}
@@ -9902,7 +9906,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2343960321144874196, guid: 43dd0a7226459c74ba278a0a563f217c, type: 3}
       propertyPath: speed
-      value: 10
+      value: 8.5
       objectReference: {fileID: 0}
     - target: {fileID: 2343960321144874196, guid: 43dd0a7226459c74ba278a0a563f217c, type: 3}
       propertyPath: startDelay
