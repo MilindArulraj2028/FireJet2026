@@ -58,7 +58,7 @@ public class ButtonHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
     void StartGame()
     {
-        SceneManager.LoadScene("TutorialMap");
+        SceneManager.LoadScene("World");
     }
 
 }
