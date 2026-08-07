@@ -175,17 +175,17 @@ public class PlayerController : MonoBehaviour
             fuel += fuelRefillSpeed * Time.deltaTime;
         }
 
-        fuel = Mathf.Clamp(fuel, 0f, maxFuel);                     //Show this
+        fuel = Mathf.Clamp(fuel, 0f, maxFuel);                     //Show this      
 
 
 
         if (CurrentHealth < 0f && !isDead)
         {
             isDead = true;
-            ShopStats.instance.playerAgility = acceleration;
-            ShopStats.instance.playerHealth = MaxHealth;
-            ShopStats.instance.playerFuelEfficiency = fuelDepletionSpeed;
-            ShopStats.instance.playerMaxFuel = maxFuel;
+            //ShopStats.instance.playerAgility = acceleration;
+           // ShopStats.instance.playerHealth = MaxHealth;
+          //  ShopStats.instance.playerFuelEfficiency = fuelDepletionSpeed;
+          //  ShopStats.instance.playerMaxFuel = maxFuel;
             StartCoroutine(StartDeath("DeathTransition"));
 
 
@@ -263,7 +263,7 @@ public class PlayerController : MonoBehaviour
     {
         transition.SetBool("Die", true);
         yield return new WaitForSeconds(1.8f);
-        print("g=o");
+        
         SceneManager.LoadScene(bro);
 
     }

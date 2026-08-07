@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UpgradeController : MonoBehaviour
 {
@@ -37,5 +38,23 @@ public class UpgradeController : MonoBehaviour
     {
         ShopStats.instance.playerAgility *= 1.3f;
   
+    }
+    public void LevelOne()
+    {
+        Debug.Log("ButtonCLicked");
+        SceneManager.LoadScene("World");
+
+    }
+    public void LevelTwo()
+    {
+        SceneManager.LoadScene("World 2");
+    }
+    public void LevelThree()
+    {
+        SceneManager.LoadScene("World 1");
+    }
+    public void LevelFour()
+    {
+        SceneManager.LoadScene("World 2");
     }
 }

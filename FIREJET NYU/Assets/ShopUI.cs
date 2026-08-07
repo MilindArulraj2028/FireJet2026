@@ -16,10 +16,14 @@ public class ShopUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log("sliderAgility: " + sliderAgility);
+        Debug.Log("ShopStats.instance: " + ShopStats.instance);
+
         sliderAgility.value = ShopStats.instance.playerAgility;
         sliderHealth.value = ShopStats.instance.playerHealth;
         sliderFuelEfficiency.value = 1/ShopStats.instance.playerFuelEfficiency;
         sliderMaxFuel.value = ShopStats.instance.playerMaxFuel;
+        
     }
 
     // Update is called once per frame
