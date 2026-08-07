@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using Cinemachine;
+using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
@@ -67,9 +68,15 @@ public class PlayerController : MonoBehaviour
     public Animator transition;
     public SpriteRenderer renderer;
     private bool died;
+    public float stopWatch;
+    public bool broadcasting;
+
+
 
     void Start()
     {
+        broadcasting = true;
+        stopWatch = 0f;
         renderer.enabled = true;
         transition.SetBool("Die", false);
         isDead = false;
@@ -86,6 +93,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         
+        
         healthSlider.value = CurrentHealth / MaxHealth;
         
 
@@ -99,7 +107,11 @@ public class PlayerController : MonoBehaviour
 
         boost.value = (fuel / maxFuel) - 0.05f;
         spewing = false;
-
+        if (broadcasting)
+        {
+            stopWatch += Time.deltaTime;
+            ShopStats.instance.LevelTime = stopWatch;
+        }
         if (Input.GetKey(KeyCode.Space))
         {
 
@@ -182,7 +194,7 @@ public class PlayerController : MonoBehaviour
         if (CurrentHealth < 0f && !isDead)
         {
             isDead = true;
-            //ShopStats.instance.playerAgility = acceleration;
+            
            // ShopStats.instance.playerHealth = MaxHealth;
           //  ShopStats.instance.playerFuelEfficiency = fuelDepletionSpeed;
           //  ShopStats.instance.playerMaxFuel = maxFuel;
@@ -238,17 +250,21 @@ public class PlayerController : MonoBehaviour
         }
         if (other.gameObject.CompareTag("Lava"))
         {
+            broadcasting = false;
             CurrentHealth = 0f;
             StartCoroutine(ShakeOnce(10f));
             Instantiate(deathParticle, transform.position + new Vector3(0f, 0f, 3f), Quaternion.identity);
             SceneManager.LoadScene("DeathTransition");
+            
         }
     }
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Finish"))
         {
+            broadcasting = false;
             StartCoroutine(StartDeath("CoinFlip"));
+
 
         }
 

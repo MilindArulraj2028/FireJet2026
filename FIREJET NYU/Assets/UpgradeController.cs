@@ -51,7 +51,7 @@ public class UpgradeController : MonoBehaviour
     }
     public void LevelThree()
     {
-        SceneManager.LoadScene("World 1");
+        SceneManager.LoadScene("World 3");
     }
     public void LevelFour()
     {
