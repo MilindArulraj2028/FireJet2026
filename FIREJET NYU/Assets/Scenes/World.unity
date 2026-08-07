@@ -8770,7 +8770,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startDelay: 2
-  speed: 6
+  speed: 8
   pos: {x: 0, y: 0, z: 0}
 --- !u!61 &1315062070
 BoxCollider2D:
@@ -12493,6 +12493,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1960573894}
     - target: {fileID: 6340172038647195901, guid: b43d82ef74e25f9478d6118503df7248, type: 3}
+      propertyPath: maxFuel
+      value: 2000
+      objectReference: {fileID: 0}
+    - target: {fileID: 6340172038647195901, guid: b43d82ef74e25f9478d6118503df7248, type: 3}
       propertyPath: transition
       value: 
       objectReference: {fileID: 2085109194}
@@ -12500,6 +12504,10 @@ PrefabInstance:
       propertyPath: healthSlider
       value: 
       objectReference: {fileID: 1502241819}
+    - target: {fileID: 6340172038647195901, guid: b43d82ef74e25f9478d6118503df7248, type: 3}
+      propertyPath: fuelRefillSpeed
+      value: 600
+      objectReference: {fileID: 0}
     - target: {fileID: 8052449003482843330, guid: b43d82ef74e25f9478d6118503df7248, type: 3}
       propertyPath: m_Name
       value: Player

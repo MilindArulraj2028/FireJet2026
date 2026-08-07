@@ -18,7 +18,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Transitions/DeathTransition.unity
     guid: 28a3c830f40417e498cbc488fcaa9a38
   - enabled: 1
-    path: Assets/Scenes/Level1Map.unity
+    path: Assets/Scenes/World 3.unity
     guid: 5091e8b4d0aa2a14f92c298edfc1ebdf
   - enabled: 1
     path: Assets/Scenes/Transitions/CoinFlip.unity

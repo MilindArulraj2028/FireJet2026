@@ -493,7 +493,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1666809924}
         m_TargetAssemblyTypeName: UpgradeController, Assembly-CSharp
-        m_MethodName: LevelOne
+        m_MethodName: LevelThree
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
