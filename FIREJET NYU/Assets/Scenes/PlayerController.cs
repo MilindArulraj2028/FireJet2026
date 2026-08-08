@@ -70,11 +70,16 @@ public class PlayerController : MonoBehaviour
     private bool died;
     public float stopWatch;
     public bool broadcasting;
+    public bool immune;
 
 
-
+    void OnEnable()
+    {
+        immune = false;
+    }
     void Start()
     {
+        immune = false;
         broadcasting = true;
         stopWatch = 0f;
         renderer.enabled = true;
@@ -198,6 +203,7 @@ public class PlayerController : MonoBehaviour
            // ShopStats.instance.playerHealth = MaxHealth;
           //  ShopStats.instance.playerFuelEfficiency = fuelDepletionSpeed;
           //  ShopStats.instance.playerMaxFuel = maxFuel;
+          immune = true;
             StartCoroutine(StartDeath("DeathTransition"));
 
 
@@ -250,11 +256,16 @@ public class PlayerController : MonoBehaviour
         }
         if (other.gameObject.CompareTag("Lava"))
         {
-            broadcasting = false;
-            CurrentHealth = 0f;
-            StartCoroutine(ShakeOnce(10f));
-            Instantiate(deathParticle, transform.position + new Vector3(0f, 0f, 3f), Quaternion.identity);
-            SceneManager.LoadScene("DeathTransition");
+            if (immune == false)
+            {
+                broadcasting = false;
+                CurrentHealth = 0f;
+                StartCoroutine(ShakeOnce(10f));
+                Instantiate(deathParticle, transform.position + new Vector3(0f, 0f, 3f), Quaternion.identity);
+                StartCoroutine(StartDeath("DeathTransition"));
+            }
+           
+            
             
         }
     }
@@ -263,6 +274,7 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.CompareTag("Finish"))
         {
             broadcasting = false;
+            immune = false;
             StartCoroutine(StartDeath("CoinFlip"));
 
 
@@ -271,7 +283,11 @@ public class PlayerController : MonoBehaviour
     }
     void TakeDamage(float damage)
     {
-        CurrentHealth -= damage;
+        if (immune == false)
+        {
+            CurrentHealth -= damage;
+        }
+       
     }
 
 

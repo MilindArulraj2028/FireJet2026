@@ -7,6 +7,7 @@ public class MoveForward : MonoBehaviour
     public float startDelay;
     public float speed;
     public Vector3 pos;
+    public PlayerController player;
     // Start is called before the first frame update
 
     void Start()
@@ -19,10 +20,11 @@ public class MoveForward : MonoBehaviour
     {
         pos = transform.position;
         startDelay -=Time.deltaTime;
-        if (startDelay <= 0)
+        if (startDelay <= 0 && player.broadcasting == true)
         {
             pos.x += speed * Time.deltaTime;
         }
         transform.position = pos;
+
     }
 }
